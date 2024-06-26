@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "xpoverhaul",
+  "version": "${version}",
+  "name": "Enchanting Overhaul",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Duzos/xpoverhaul"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/xpoverhaul/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "mc.duzo.xpoverhaul.client.EnchantingOverhaulClient"
+    ],
+    "main": [
+      "mc.duzo.xpoverhaul.EnchantingOverhaul"
+    ]
+  },
+  "mixins": [
+    "xpoverhaul.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
