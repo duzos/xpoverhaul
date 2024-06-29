@@ -4,8 +4,14 @@
   "package": "mc.duzo.xpoverhaul.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "client.AnvilScreenHandlerMixin",
+    "server.ExperienceOrbMixin",
+    "server.ItemMixin",
+    "server.PlayerEntityMixin"
   ],
   "client": [
+    "client.DeathScreenMixin",
+    "client.InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
