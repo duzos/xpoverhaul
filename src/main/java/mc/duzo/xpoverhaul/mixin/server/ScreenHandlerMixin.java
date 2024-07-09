@@ -1,0 +1,35 @@
+package mc.duzo.xpoverhaul.mixin.server;
+
+import mc.duzo.xpoverhaul.util.merge.MergingItems;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(ScreenHandler.class)
+public abstract class ScreenHandlerMixin {
+	@Shadow public abstract ItemStack getCursorStack();
+
+	@Shadow public abstract Slot getSlot(int index);
+
+	@Shadow public abstract void setCursorStack(ItemStack stack);
+
+	@Inject(method = "onSlotClick", at = @At("HEAD"))
+	private void xpoverhaul$onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo ci) {
+		if (button == 1 && slotIndex != -1) {
+			ItemStack result = MergingItems.merge(this.getCursorStack(), this.getSlot(slotIndex).getStack()).orElse(null);
+
+			if (result != null) {
+				this.setCursorStack(ItemStack.EMPTY);
+				this.getSlot(slotIndex).setStack(result);
+			}
+		}
+	}
+}
