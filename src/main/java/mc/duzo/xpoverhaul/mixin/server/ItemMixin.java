@@ -2,7 +2,6 @@ package mc.duzo.xpoverhaul.mixin.server;
 
 import mc.duzo.xpoverhaul.util.removed.RemovedItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ExperienceBottleItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -13,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Item.class)
 public class ItemMixin {
+
 	@Inject(method = "inventoryTick", at = @At("HEAD"), cancellable = true)
 	private void xpoverhaul$inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
 		if (RemovedItems.isRemoved(stack)) { // todo could be costly.
@@ -24,4 +24,5 @@ public class ItemMixin {
 			RemovedItems.removeBannedEnchants(stack);
 		}
 	}
+
 }

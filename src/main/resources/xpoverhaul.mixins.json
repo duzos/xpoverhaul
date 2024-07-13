@@ -6,6 +6,7 @@
   "mixins": [
     "server.AnvilScreenHandlerMixin",
     "server.ExperienceOrbMixin",
+    "server.ItemGroupMixin",
     "server.ItemMixin",
     "server.PlayerEntityMixin",
     "server.ScreenHandlerMixin"
